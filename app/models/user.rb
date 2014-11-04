@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :tasks
-  
+  has_many :tasks, dependent: :destroy
+  has_many :lists, dependent: :destroy
   attr_accessible :email, :password
 
   attr_accessor :password

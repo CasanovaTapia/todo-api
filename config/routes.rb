@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :lists, except: [:new, :edit]
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#create", :as => "log_in"
   get "sign_up" => "users#create", :as => "sign_up"
