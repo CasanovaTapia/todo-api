@@ -18,7 +18,8 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.new(list_params)
+    @user = current_user
+    @list = current_user.lists.new(list_params)
 
     if @list.save
       render json: @list, status: :created, location: @list
@@ -49,7 +50,7 @@ class ListsController < ApplicationController
   end
 
   private
-    
+
     def list_params
       params.require(:list).permit(:title, :permission, :user_id)
     end

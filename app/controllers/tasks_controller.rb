@@ -18,7 +18,9 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @user = current_user
+    @list = List.find(:list_id)
+    @task = @list.tasks.new(task_params)
 
     if @task.save
       render json: @task, status: :created, location: @task
@@ -49,7 +51,7 @@ class TasksController < ApplicationController
   end
 
   private
-    
+
     def task_params
       params.require(:task).permit(:name)
     end
